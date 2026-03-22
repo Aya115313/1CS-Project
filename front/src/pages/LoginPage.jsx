@@ -10,10 +10,13 @@ export function LoginPage() {
     return (
         <div className='container'>
             <div className="login-page">
-                <img src="/images/logo.png" className="logo" />
-                <h3 className='esi-title'>ESI Sidi Bel Abbès</h3>
-                <h6 className='Title'>Absence Management System</h6>
-                <p className='text'>ID OR UNIVERSITY EMAIL  </p>
+                <div className="title-container">
+                    <img src="/images/logo.png" className="logo" />
+                    <h3 className='esi-title'>ESI Sidi Bel Abbès</h3>
+                    <h6 className='Title'>Absence Management System</h6>
+                </div>
+{/*                 
+                <p className='text'>ID OR UNIVERSITY EMAIL</p>
                 <div className="input-wrapper">
                     <span className="input-prefix">@</span>
                     <input type="text" placeholder="e.nom@esi-sba.dz" className='input-text' />
@@ -26,8 +29,6 @@ export function LoginPage() {
                         <button type="button" className='eye-button' onClick={togglePassword}>
                             <img src="/images/eye.png" className='eye-icon' />
                         </button>
-
-
                     </span>
 
 
@@ -48,7 +49,7 @@ export function LoginPage() {
                     <p className='TEXT'>Technical issues ? </p>
                     <a href="mailto:support@example.com" className="support-link">Contact Support</a>
 
-                </div>
+                </div> */}
 
             </div>
             <p>© 2026 École Supérieure en Informatique de Sidi Bel Abbès</p>

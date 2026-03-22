@@ -1,24 +1,31 @@
 .login-page {
     height: 500px;
 
-    width: 450px;
-    margin: 50px auto 0;
+    max-width: 480px;
+    width: 400px;
+    
+    margin: 70px auto 0;
 
-    border: 1px solid;
-    background-color: rgb(201, 199, 199);
-    color: #001B4DB2;
+    border-radius: 12px;
+    background-color: white;
     text-align: center;
 
-    padding: 15px;
-    padding-left: 30px;
+    padding: 40px;
 
+    filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.15));
 }
 
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
 
 .logo {
-    width: 65px;
-    height: auto;
-    margin-bottom: 0px;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 24px;    
 }
 
 .esi-title {
@@ -174,23 +181,17 @@
     color: rgb(225, 49, 49);
     font-weight: bold;
     font-size: 13px;
-
-
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    min-width: 215vh;
-
 }
 
 .container {
-    min-height: 100vh;
-    background-color: #001B4D;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+
+    background: #001B4D;
+    background: linear-gradient(rgba(0, 27, 77, 1) 0%, rgba(0, 6, 16, 1) 100%);
+    
+    width: 100vw;
+    height: 100vh;
 }
