@@ -1,34 +1,36 @@
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import styles from './loginPage.module.css';
+import styles from './ResetPassword.module.css'
 import api from '../api/axios';
 
-export function LoginPage() {
+export function ResetPassword() {
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
 
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     function togglePassword() {
         setShowPassword(!showPassword);
     }
+    function toggleConfirmPassword() {
+        setShowConfirmPassword(!showConfirmPassword);
+    }
 
+    const passwordsMatch = (password === confirmPassword);
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await api.post('accounts/login/', {
-                email: email,
+
                 password: password
             });
 
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
 
-            if (response.status === 200) {
-                navigate('/dashboard');
-            }
         } catch (error) {
             console.error("Login Error:", error.response?.data);
             navigate('/dumbahh');
@@ -37,57 +39,58 @@ export function LoginPage() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.loginPage}>
+            <div className={styles.ResetPassword}>
                 <div className={styles.titleContainer}>
-                    <img src="/images/logo.png" className={styles.logo} />
-                    <h3 className={styles.esiTitle}>ESI Sidi Bel Abbès</h3>
-                    <h6 className={styles.appTitle}>Absence Management System</h6>
+                    <img src="/images/lock-key.png" className={styles.lockIcon} />
+                    <h3 className={styles.Title}>Change your Password</h3>
+                    <h6 className={styles.appTitle}>Enter a new password below to change  the password </h6>
                 </div>
 
                 <form className={styles.bodyContainer} onSubmit={handleSubmit}>
 
-                    <p className={styles.inputFieldTitle}>ID OR UNIVERSITY EMAIL</p>
+                    <p className={styles.inputFieldTitle}>NEW PASSWORD*</p>
                     <div className={styles.inputWrapper}>
-                        <img src="/images/@.png" className={styles.inputIcon} />
-                        <input
-                            type="text"
-                            placeholder="e.nom@esi-sba.dz"
-                            className={styles.inputWrapperText}
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)} />
 
-                    </div>
-
-                    <p className={styles.inputFieldTitle}>PASSWORD</p>
-                    <div className={styles.inputWrapper}>
                         <input
                             type={showPassword ? 'text' : 'password'}
                             placeholder="••••••••"
                             className={styles.inputWrapperText}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)} />
-
                         <span>
-                            <img src="/images/lock.png" className={styles.inputIcon} />
                             <button type="button" className={styles.eyeButton} onClick={togglePassword}>
                                 <img src="/images/eye-open.png" className={styles.eyeIcon} />
                             </button>
                         </span>
                     </div>
 
-                    <div className={styles.rememberContainer}>
-                        <div className={styles.rememberGroup}>
-                            <input type="checkbox" id="remember" className={styles.checkbox} />
-                            <label htmlFor="remember" className={styles.rememberText}>Remember me</label>
-                        </div>
+                    <p className={styles.inputFieldTitle}>CONFIRM PASSWORD*</p>
+                    <div className={styles.inputWrapper}>
+                        <input
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            placeholder="••••••••"
+                            className={styles.inputWrapperText}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)} />
 
-                        <a href="mailto:support@example.com" className={styles.forgetLink}>Forgot Password?</a>
+                        <span>
 
+                            <button type="button" className={styles.eyeButton} onClick={toggleConfirmPassword}>
+                                <img src="/images/eye-open.png" className={styles.eyeIcon} />
+                            </button>
+                        </span>
                     </div>
 
-                    <button type='submit' className={styles.loginButton}>
-                        <img src="/images/exit.png" className="login-icon" />
-                        Login
+                    <label className={` ${passwordsMatch ? styles.emptyText : styles.Text}`}>Password do not match!</label>
+
+
+
+
+
+
+                    <button type='submit' className={styles.ResetPasswordButton} >
+
+                        Reset Password
                     </button>
 
                     <div className={styles.supportContainer}>
