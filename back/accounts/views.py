@@ -24,7 +24,7 @@ class LoginView(APIView):
     Retourne un token JWT + info sur si le mot de passe doit être changé.
     """
     permission_classes = [AllowAny]  # Pas besoin d'être connecté pour se connecter !
- 
+    authentication_classes = [] # YOUR COMMENT ON TOP SUCKS THIS IS WHATS SUPPOSED TO MAKE IT WORK WITHOUT JWT AUTHENTICATION FOR THIS ENDPOINT ONLY DUMBASS
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
  

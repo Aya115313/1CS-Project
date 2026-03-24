@@ -1,4 +1,5 @@
 import './Sidebar.css';
+import { useAuth } from '../context/AuthContext';
 
 const navItems = [
   { id: 'dashboard', icon: '\u25A6', label: 'Dashboard' },
@@ -9,12 +10,18 @@ const navItems = [
 ];
 
 export default function Sidebar({ activePage, onNavigate }) {
+
+  const { user, logout } = useAuth();
+
+
+  const handleLogout = () => {
+    logout();
+  }
+
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="logo-icon">
-          <span>{'\u{1F393}'}</span>
-        </div>
+          <img src="../../public/images/logo.png" className="logo-icon" />
         <div className="logo-text">
           <span className="logo-title">ESI SBA</span>
           <span className="logo-subtitle">ABSENCE PORTAL</span>
@@ -43,10 +50,10 @@ export default function Sidebar({ activePage, onNavigate }) {
           />
         </div>
         <div className="user-info">
-          <span className="user-name">Dr. Patrick B.</span>
-          <span className="user-role">System Administrator</span>
+          <span className="user-name">{user ? `${user.first_name} ${user.last_name}` : "Guest"}</span>
+          <span className="user-role">{user?.role || "User"}</span>
         </div>
-        <button type="button" className="logout-btn" title="Logout" aria-label="Logout">
+        <button type="button" className="logout-btn" title="Logout" aria-label="Logout" onClick={handleLogout}>
           {'\u21E5'}
         </button>
       </div>

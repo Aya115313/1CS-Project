@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import styles from './loginPage.module.css';
-import api from '../api/axios';
+import { useAuth } from '../context/AuthContext'; // Import the hook
+
 
 export function LoginPage() {
+    const { login } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
@@ -12,17 +14,17 @@ export function LoginPage() {
     const [password, setPassword] = useState('');
 
     function togglePassword() {
-        setShowPassword(!showPassword);
+        setShowPassword(!showPassword); 
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await api.post('accounts/login/', {
-                email: email,
+                email: email, 
                 password: password
             });
-
+            
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
 
@@ -30,7 +32,8 @@ export function LoginPage() {
                 navigate('/dashboard');
             }
         } catch (error) {
-            console.error("Login Error:", error.response?.data);
+            console.error("Login Error:", error.response);
+            // but maybe add a toast notification for real errors!
             navigate('/dumbahh');
         }
     };
