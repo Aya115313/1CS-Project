@@ -14,19 +14,19 @@ export function LoginPage() {
     const [password, setPassword] = useState('');
 
     function togglePassword() {
-        setShowPassword(!showPassword); 
+        setShowPassword(!showPassword);
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             console.log("Attempting login for:", email);
-            
+
             // Use the AuthContext login method
             const response = await login(email, password);
-            
+
             console.log("Login successful, user data:", response.user);
-            
+
             // Check if user must change password (admin bypasses forced-reset behavior)
             if (response.user.must_change_password && response.user.role !== 'ADMIN') {
                 console.log("User must change password, redirecting to reset password");
@@ -38,7 +38,7 @@ export function LoginPage() {
                 console.log("Non-admin login, redirecting to home placeholder");
                 navigate('/home');
             }
-            
+
         } catch (error) {
             console.error("Login Error:", error.response?.data || error.message);
             // Navigate to error page on login failure
@@ -103,7 +103,7 @@ export function LoginPage() {
 
                     <div className={styles.supportContainer}>
                         Technical issues?
-                        <a href="mailto:support@example.com" className={styles.supportLink}>Contact Support</a>
+                        <Link to="/ContactSupport" className={styles.supportLink}>Contact Support</Link>
                     </div>
                 </form>
 

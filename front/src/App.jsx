@@ -6,7 +6,7 @@ import DashboardShell from './pages/DashboardShell';
 import { useAuth } from './context/AuthContext';
 import './App.css';
 import { ResetPassword } from './pages/ResetPassword';
-
+import { ContactSupport } from './pages/ContactSupport';
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
@@ -49,20 +49,19 @@ export default function App() {
   return (
     <Routes>
       {/* Login is Public: If already logged in, redirect to dashboard */}
-      <Route 
-        path="/" 
+      <Route
+        path="/LoginPage"
         element={
-          <PublicRoute>
-            <LoginPage />
-          </PublicRoute>
-        } 
+
+          <LoginPage />
+        }
       />
 
       {/* Dashboard is Protected: If not logged in, redirect to login */}
-          <Route
+      <Route
         path="/dashboard"
         element={
-          <ProtectedRoute allowedRoles={[ 'ADMIN' ]}>
+          <ProtectedRoute allowedRoles={['ADMIN']}>
             <DashboardShell />
           </ProtectedRoute>
         }
@@ -82,6 +81,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <ResetPassword />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/ContactSupport"
+        element={
+          <ProtectedRoute>
+            <ContactSupport />
           </ProtectedRoute>
         }
       />
